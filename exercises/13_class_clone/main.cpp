@@ -8,14 +8,14 @@ class DynFibonacci {
 
 public:
     // TODO: 实现动态设置容量的构造器
-    DynFibonacci(int capacity): cache(new size_t[std::min(capacity, 3) + 1]), cached(3) {
-        cache[1] = cache[2] = 1;
-        cache[3] = 2;
+    DynFibonacci(int capacity): cache(new size_t[capacity + 1]), cached(1) {
+        cache[0] = 0;
+        cache[1] = 1;
     }
 
     // TODO: 实现复制构造器
     DynFibonacci(DynFibonacci const &other) {
-        cache = new size_t[other.cached + 1];
+        cache = new size_t[sizeof(other.cache) / sizeof(size_t)];
         cached = other.cached;
 
         for (int i = 1; i <= cached; ++i) {
@@ -30,7 +30,8 @@ public:
 
     // TODO: 实现正确的缓存优化斐波那契计算
     size_t get(int i) {
-        for (; cached <= i; ++cached) {
+        while (cached < i) {
+            ++cached;
             cache[cached] = cache[cached - 1] + cache[cached - 2];
         }
 

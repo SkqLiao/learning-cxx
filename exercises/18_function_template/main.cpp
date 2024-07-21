@@ -1,4 +1,5 @@
 ﻿#include "../exercise.h"
+#include <cmath>
 
 // READ: 函数模板 <https://zh.cppreference.com/w/cpp/language/function_template>
 // TODO: 将这个函数模板化
@@ -9,7 +10,7 @@ T plus(T a, T b) {
 
 template<class T>
 bool equal(T a, T b) {
-    return fabs((double)(a - b)) < 1e-9;
+    return std::fabs((double)(a - b)) < 1e-9;
 }
 
 int main(int argc, char **argv) {
